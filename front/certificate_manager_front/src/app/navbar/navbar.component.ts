@@ -9,7 +9,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class NavbarComponent implements OnInit{
 
-  @ViewChild('nav', { static: false }) nav: ElementRef | undefined;
+  @ViewChild('nav') nav: ElementRef | undefined;
 
   role: string = "";
 

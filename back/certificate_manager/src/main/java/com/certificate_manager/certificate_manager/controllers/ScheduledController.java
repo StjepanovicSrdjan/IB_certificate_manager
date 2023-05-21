@@ -17,7 +17,6 @@ public class ScheduledController {
 	@Transactional
 	@Scheduled(initialDelayString = "${initialdelay}", fixedDelayString = "${fixeddelay}")
 	public void test() {
-		System.err.println("ajde");
 		this.scheduledService.invalidateCertificatesWhichExpired();
 	} 
 } 

@@ -1,5 +1,5 @@
 <div id="body" class="column">
-    <app-navbar></app-navbar>
+    <!-- <app-navbar></app-navbar> -->
     <div style="display: flex;
     flex-direction: row;
     align-items: center;
@@ -9,7 +9,9 @@
         </div>
         <div id="right" class="column">
             <h2>Almost done!</h2>
-            <p id="subtitle-p">Let us know where you want us to send you a <b>verification code</b>. After verifying your account, you can login and use Certivus.</p>
+            <p id="subtitle-p" *ngIf="this.cause == 'registration' || this.cause == ''">Let us know where you want us to send you a <b>verification code</b>. After verifying your account, you can login and use Certivus.</p>
+            <p id="subtitle-p" *ngIf="this.cause == 'reset'">Let us know where you want us to send you a <b>verification code</b>. After reseting your password, you can login and use Certivus.</p>
+            <p id="subtitle-p" *ngIf="this.cause == 'twofactor'">Let us know where you want us to send you a <b>verification code</b>. After two-factor authentication, you can use Certivus.</p>
             <div id="cards" class="row">
                 <div class="card column" (click)="clickSms()" [ngClass]="!this.clickedSms ? 'not-clicked-card' : 'clicked-card'">
                     <h1>SMS</h1>

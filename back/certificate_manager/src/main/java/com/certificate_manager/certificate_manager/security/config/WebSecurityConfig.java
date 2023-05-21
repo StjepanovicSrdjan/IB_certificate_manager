@@ -1,6 +1,7 @@
 package com.certificate_manager.certificate_manager.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,10 +16,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.certificate_manager.certificate_manager.security.auth.RestAuthenticationEntryPoint;
 import com.certificate_manager.certificate_manager.security.auth.TokenAuthenticationFilter;
+import com.certificate_manager.certificate_manager.security.jwt.IJWTTokenService;
 import com.certificate_manager.certificate_manager.security.jwt.TokenUtils;
 import com.certificate_manager.certificate_manager.services.UserServiceImpl;
 
@@ -27,6 +30,9 @@ import com.certificate_manager.certificate_manager.services.UserServiceImpl;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig {
+	
+	@Autowired
+	private IJWTTokenService tokenService;
 
 	@Bean
     public UserDetailsService userDetailsService() {
@@ -49,8 +55,7 @@ public class WebSecurityConfig {
  	    return authProvider;
  	}
  	
- 	
- 	
+
  	@Autowired
  	private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
  
@@ -71,12 +76,17 @@ public class WebSecurityConfig {
 
     	http.authorizeRequests()
 			.requestMatchers("/api/user/login").permitAll()
+			.requestMatchers("/api/user").permitAll()
+			.requestMatchers("/api/user/send/verification/email/{email}").permitAll()
+			.requestMatchers("/api/user/activate/{activationId}").permitAll()
+			.requestMatchers("/api/user/reset/password/email/{email}").permitAll()
+			.requestMatchers("/api/user/resetPassword").permitAll()
 			.requestMatchers("api/certificate/validate-upload").permitAll()
 			.requestMatchers("/api/user/rotatePassword").permitAll()
 			.requestMatchers("/api/user/**").permitAll()
 			.anyRequest().authenticated().and()
 			.cors().and()
-			.addFilterBefore(new TokenAuthenticationFilter(tokenUtils,  userDetailsService()), BasicAuthenticationFilter.class);
+			.addFilterBefore(new TokenAuthenticationFilter(tokenUtils,  userDetailsService(), tokenService), BasicAuthenticationFilter.class);
 		
 		http.csrf().disable(); 
 

@@ -63,6 +63,19 @@ button {
     opacity: 0.95;
 }
 
+#recaptcha > div {
+    margin: 0 auto !important;
+}
+
+.captcha-div {
+    text-align: center;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 @media only screen and (max-width: 900px) {
     #login-container {
         grid-template-columns: 100%;

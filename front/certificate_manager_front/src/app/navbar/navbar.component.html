@@ -12,8 +12,8 @@
         <div class="navbar-nav">
             <!-- <a *ngIf="role != 'ROLE_ADMIN' && role != null" (click)="openHome(role)">Home</a> -->
             <!-- <a *ngIf="role != null" [routerLink]="['/ride-history']">History</a> -->
-            <a id="login-option" class="yellow" *ngIf="role === ''" [routerLink]="['/login']">Log in</a>
-            <a id="sign-up-option" class="back-yellow" *ngIf="role === ''" [routerLink]="['/register']">Register</a>  
+            <a id="login-option" class="yellow" *ngIf="role === ''" [routerLink]="['login']">Log in</a>
+            <a id="sign-up-option" class="back-yellow" *ngIf="role === ''" [routerLink]="['register']">Register</a>  
         </div>
       </div>
     </div>

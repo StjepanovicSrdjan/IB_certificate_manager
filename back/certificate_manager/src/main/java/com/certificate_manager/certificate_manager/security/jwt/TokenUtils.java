@@ -101,7 +101,14 @@ public class TokenUtils {
 		String authHeader = getAuthHeaderFromHeader(request);
 
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {
-			return authHeader.substring(7);
+			authHeader =  authHeader.substring(7);
+			while(authHeader.charAt(0) == '\"' || authHeader.charAt(authHeader.length() -1) == '\"') {
+				if (authHeader.charAt(0) == '\"')
+					authHeader = authHeader.substring(1, authHeader.length());
+				if (authHeader.charAt(authHeader.length() - 1) == '\"')
+					authHeader = authHeader.substring(0, authHeader.length() - 1);
+			}
+			return authHeader;
 		}
 
 		return null;

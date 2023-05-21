@@ -1,0 +1,58 @@
+
+<div style="display: flex;
+align-items: center;
+justify-content: center;">
+    <div class="border back-white" id="reg-container">
+        <div id="left-container">
+            <img class="login-img" src="../../assets/signUp-img.svg" alt="">
+        </div>
+        <div id="form-container">
+            <h1>Join <b>Certivus</b>!</h1>
+            <form #formDirective="ngForm" [formGroup]="regForm" (ngSubmit)="register(formDirective)">
+                <mat-form-field [hideRequiredMarker]="true" id="name">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" name="name" formControlName="name" />
+                    <mat-error *ngIf="regForm.get('name')?.errors?.['required']">entering name is required</mat-error>
+                    <mat-error *ngIf="regForm.get('name')?.errors?.['nameRegexError'] && !regForm.get('name')?.errors?.['required']">invalid name format</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Surname</mat-label>
+                    <input matInput type="text" name="surname" formControlName="surname" />
+                    <mat-error *ngIf="regForm.get('surname')?.errors?.['required']">entering surname is required</mat-error>
+                    <mat-error *ngIf="regForm.get('surname')?.errors?.['surnameRegexError'] && !regForm.get('surname')?.errors?.['required']">invalid surname format</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" name="email" formControlName="email" />
+                    <mat-error *ngIf="regForm.get('email')?.errors?.['required']">entering email is required</mat-error>
+                    <mat-error *ngIf="regForm.get('email')?.errors?.['email']">invalid email format</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <mat-icon id="eye-icon" matSuffix (click)="isFirstVisible = !isFirstVisible">{{isFirstVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    <input matInput type="password" name="password" formControlName="password" />
+                    <mat-error *ngIf="regForm.get('password')?.errors?.['required']">entering password is required</mat-error>
+                    <mat-error *ngIf="regForm.get('password')?.errors?.['passwordRegexError']  && !regForm.get('password')?.errors?.['required']">one lcase, upcase, digit</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Confirm password</mat-label>
+                    <mat-icon id="eye-icon" matSuffix (click)="isSecondVisible = !isSecondVisible">{{isSecondVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    <input matInput type="password" name="conf-password" formControlName="confpass"/>
+                    <mat-error *ngIf="regForm.get('confpass')?.errors?.['required']">confirming password is required</mat-error>
+                    <mat-error *ngIf="regForm.errors?.['passwordMismatchError']">passwords don't match</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Phone number</mat-label>
+                    <input matInput type="tel" name="phonenum" formControlName="phonenum" />
+                    <mat-error *ngIf="regForm.get('phonenum')?.errors?.['required']">entering phone number is required</mat-error>
+                    <!-- <mat-error *ngIf="regForm.get('phonenum')?.errors?.['phonenumRegexError'] && !registerForm.get('phonenum')?.errors?.['required']">invalid phone number format</mat-error> -->
+                  </mat-form-field>
+                  <div class="captcha-div">
+                    <re-captcha id="recaptcha" name="recaptcha" (resolved)="resolved($event)" formControlName="recaptcha"></re-captcha>
+                    <mat-error *ngIf="submited && regForm.get('recaptcha')?.errors?.['required']">filling recaptcha is required</mat-error>
+                  </div>
+                  <button type="submit" class="conf-button back-yellow" mat-raised-button>Register</button>
+            </form>
+        </div>
+    </div>
+</div>

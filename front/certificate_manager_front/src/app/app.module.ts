@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from '../infrastructure/app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,6 +25,11 @@ import { VerificationChoiceComponent } from './verification-choice/verification-
 import { VerificationCodeComponent } from './verification-code/verification-code.component';
 import { NgxOtpInputModule } from 'ngx-otp-input';
 import { PasswordRotationComponent } from './password-rotation/password-rotation.component';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
+import { RegisterComponent } from './register/register.component';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -44,19 +48,28 @@ import { PasswordRotationComponent } from './password-rotation/password-rotation
     WithdrawDialogComponent,
     GenerateRequestDialogComponent,
     PasswordRotationComponent,
-    
+    RegisterComponent,
+    VerificationChoiceComponent,
+    VerificationCodeComponent,
+    ResetPasswordComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    CommonModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxOtpInputModule
+    NgxOtpInputModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    NgxOtpInputModule,
+    RouterModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline', hideRequiredMarker: 'true' }},
@@ -64,6 +77,11 @@ import { PasswordRotationComponent } from './password-rotation/password-rotation
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    { provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: environment.recaptcha.siteKey,
+      } as RecaptchaSettings,
     }
   ],
   bootstrap: [AppComponent]

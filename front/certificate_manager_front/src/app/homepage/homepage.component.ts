@@ -83,7 +83,9 @@ export class HomepageComponent {
   }
 
   withdraw(certificate: any){
+    console.log(certificate);
     this.dialog.open(WithdrawDialogComponent, {
+
       data: {serialNumber: certificate.serialNumber}
     });
   }

@@ -20,8 +20,14 @@ justify-content: center; height: 100%;">
                     <input matInput [type]="isVisible? 'text' : 'password'" name="password" formControlName="password" />
                     <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">entering password is required</mat-error>
                 </mat-form-field>
+                <div class="captcha-div">
+                    <re-captcha id="recaptcha" name="recaptcha" (resolved)="resolved($event)" formControlName="recaptcha"></re-captcha>
+                    <mat-error *ngIf="submited && loginForm.get('recaptcha')?.errors?.['required']">filling recaptcha is required</mat-error>
+                </div>
+                
+
                 <button type="submit" class="conf-button back-yellow" mat-raised-button>Login</button>
-                <a id="forgotten-password-ref" [routerLink]="['/forgot-password']">forgot your password?</a>
+                <a id="forgotten-password-ref" (click)="redirectToReset()">forgot your password?</a>
             </form>
         </div>
     </div>

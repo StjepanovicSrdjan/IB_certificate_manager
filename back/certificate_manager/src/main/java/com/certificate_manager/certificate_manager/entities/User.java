@@ -87,6 +87,7 @@ public class User {
 		this.lastname = userDTO.getLastname();
 		this.email = userDTO.getEmail();
 		this.phoneNumber = userDTO.getPhoneNumber();
+		this.verified = false;
 	}
 
 	public int getId() {

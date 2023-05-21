@@ -11,12 +11,12 @@ export class AppComponent {
   loggedIn = false;
 
   constructor(private authService: AuthService) {
-    this.authService.getUserObservable().subscribe({
+    this.authService.recieveLoggedIn().subscribe({
       next: (value) => {
-        this.loggedIn = value? true: false;
+        this.loggedIn = value;
       },
       error: (err) => {
-        console.log("Error getting current user information.")
+        console.log("Error getting current logged in information.")
       },
     })
   }
