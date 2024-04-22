@@ -1,0 +1,12 @@
+<div id="decline-request-container">
+    <h1 mat-dialog-title class="orange" style="font-size: 1.3em; font-weight: 600; font-family: 'Poppins' !important" align="center">Withdraw certificate</h1>
+    <p style="color: #A9A9A9; margin: 0;" *ngIf="serialNumber != ''">Serial number: {{ serialNumber }}</p>
+    <div id="text-area-container" mat-dialog-content align="center">
+    <mat-form-field class="example-full-width">
+        <mat-label>Leave a reason</mat-label>
+        <textarea [(ngModel)]="reason" matInput rows="8" cols="40" placeholder="Inappropiate input"></textarea>
+        </mat-form-field>
+    </div>
+        <button mat-button class="conf-button back-yellow" (click)="decide()">Submit</button>
+    <!-- </div> -->
+</div>

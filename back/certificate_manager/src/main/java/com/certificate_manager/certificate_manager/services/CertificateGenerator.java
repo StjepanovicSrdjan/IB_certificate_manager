@@ -32,12 +32,15 @@ import com.certificate_manager.certificate_manager.entities.CertificateRequest;
 import com.certificate_manager.certificate_manager.entities.User;
 import com.certificate_manager.certificate_manager.enums.CertificateType;
 import com.certificate_manager.certificate_manager.enums.RequestStatus;
+import com.certificate_manager.certificate_manager.enums.UserRole;
 import com.certificate_manager.certificate_manager.exceptions.CertificateNotFoundException;
+import com.certificate_manager.certificate_manager.exceptions.NoAuthorizationException;
 import com.certificate_manager.certificate_manager.repositories.CertificateFileRepository;
 import com.certificate_manager.certificate_manager.repositories.CertificateRepository;
 import com.certificate_manager.certificate_manager.repositories.CertificateRequestRepository;
 import com.certificate_manager.certificate_manager.repositories.UserRepository;
 import com.certificate_manager.certificate_manager.services.interfaces.ICertificateGenerator;
+import com.certificate_manager.certificate_manager.services.interfaces.IUserService;
 import com.certificate_manager.certificate_manager.utils.DateUtils;
 
 @Service
@@ -54,6 +57,9 @@ public class CertificateGenerator implements ICertificateGenerator{
 	
 	@Autowired
 	private UserRepository allUsers;
+	
+	@Autowired
+	private IUserService userService;
 
 	public CertificateGenerator() {
 
@@ -122,8 +128,14 @@ public class CertificateGenerator implements ICertificateGenerator{
 
 			String serialNumber = UUID.randomUUID().toString().replace("-", "");
 
-			User user = allUsers.findById(1l).orElse(null);
+//			User user = allUsers.findAdmin().orElseThrow(() -> new UserNotFoundException());
 
+			User user = userService.getCurrentUser();
+			
+			if (user.getRole() != UserRole.ADMIN) {
+				throw new NoAuthorizationException();
+			}
+			
 			X509v3CertificateBuilder certGen = new JcaX509v3CertificateBuilder(buildX500Name(user),
 					new BigInteger(serialNumber, 16), DateUtils.toDate(validFrom), DateUtils.toDate(validTo),
 					buildX500Name(user), keys.getPublic());
@@ -136,12 +148,21 @@ public class CertificateGenerator implements ICertificateGenerator{
 			X509Certificate cert509 = certConverter.getCertificate(certHolder);
 			System.out.println(cert509);
 			
-			Certificate certDB = new Certificate(cert509.getSerialNumber().toString(), validFrom, validTo, cert509.getSerialNumber().toString(), true, CertificateType.ROOT, user);
+			Certificate parent = allCertificates.findBySerialNumber(cert509.getSerialNumber().toString()).orElse(null);
+			
+			Certificate certDB = new Certificate(cert509.getSerialNumber().toString(), validFrom, validTo, true, CertificateType.ROOT, parent, user);
 			
 			fileRepository.saveCertificateAsPEMFile(cert509);
 			fileRepository.savePrivateKeyAsPEMFile(keys.getPrivate(), cert509.getSerialNumber().toString());
 			allCertificates.save(certDB);
 			allCertificates.flush();
+			
+			if (parent == null) {
+				parent = allCertificates.findBySerialNumber(cert509.getSerialNumber().toString()).orElse(null);
+				certDB.setIssuer(parent);
+				allCertificates.save(certDB);
+				allCertificates.flush();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -151,7 +172,13 @@ public class CertificateGenerator implements ICertificateGenerator{
 	private Certificate saveCertificate(CertificateRequest request, X509Certificate cert509, KeyPair keys) {
 		try {
 			// save DB instance
-			Certificate certDB = new Certificate(request, cert509);
+			Certificate parent = allCertificates.findBySerialNumber(request.getIssuerSerialNumber()).orElse(null);
+			
+			if (parent == null) {
+				throw new CertificateNotFoundException();
+			}
+			
+			Certificate certDB = new Certificate(request, cert509, parent);
 	
 			// save Disk .crt instance
 			fileRepository.saveCertificateAsPEMFile(cert509);

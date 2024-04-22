@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.certificate_manager.certificate_manager.entities.User;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -42,11 +44,28 @@ public class TokenUtils {
 	 * @param username Korisničko ime korisnika kojem se token izdaje
 	 * @return JWT token
 	 */
-	public String generateToken(UserDetails user) {
+	public String generateToken(UserDetails user, User userFromDb) {
 		return Jwts.builder()
 				.setIssuer(APP_NAME)
 				.setSubject(user.getUsername())
 				.claim("role", user.getAuthorities())
+				.claim("id", userFromDb.getId())
+				.claim("name", userFromDb.getName())
+				.claim("lastname", userFromDb.getLastname())
+				.setAudience(generateAudience())
+				.setIssuedAt(new Date())
+				.setExpiration(generateExpirationDate())
+				.signWith(SIGNATURE_ALGORITHM, SECRET.getBytes()).compact();
+	}
+	
+	public String generateToken(User user) {
+		return Jwts.builder()
+				.setIssuer(APP_NAME)
+				.setSubject(user.getEmail())
+				.claim("role", "ROLE_USER")
+				.claim("id", user.getId())
+				.claim("name", user.getName())
+				.claim("lastname", user.getLastname())
 				.setAudience(generateAudience())
 				.setIssuedAt(new Date())
 				.setExpiration(generateExpirationDate())
@@ -96,7 +115,14 @@ public class TokenUtils {
 		String authHeader = getAuthHeaderFromHeader(request);
 
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {
-			return authHeader.substring(7);
+			authHeader =  authHeader.substring(7);
+			while(authHeader.charAt(0) == '\"' || authHeader.charAt(authHeader.length() -1) == '\"') {
+				if (authHeader.charAt(0) == '\"')
+					authHeader = authHeader.substring(1, authHeader.length());
+				if (authHeader.charAt(authHeader.length() - 1) == '\"')
+					authHeader = authHeader.substring(0, authHeader.length() - 1);
+			}
+			return authHeader;
 		}
 
 		return null;

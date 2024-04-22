@@ -1,0 +1,24 @@
+<div class="hp-container">
+    <div class="cards-container">
+        <p class="no-certificates basic-container" *ngIf="certificates.length==0 && loaded">Oh :( There are no certificates at the moment</p>
+        <div [ngClass]=" !certificate.valid ? 'back-invalid certificate-card basic-container' : 'certificate-card basic-container' " *ngFor="let certificate of certificates">
+            <div class="certificate-options">
+                <i class="fa-solid fa-ban withdraw-icon" style="cursor: pointer" *ngIf="(url == '/my-certificates' || role == 'ROLE_ADMIN') && certificate.valid"  (click)="withdraw(certificate)"></i>
+                <i class="fa-solid fa-file-circle-plus certificate-option-request" style="cursor: pointer" *ngIf="certificate.type != 'END'" (click)="generateRequest(certificate)"></i>
+                <img src="../../assets/download.svg" style="cursor: pointer" class="certificate-option-download" alt="" (click)="download(certificate.serialNumber)">
+                <i class="fa-solid fa-key certificate-option-download-key" (click)="downloadKey(certificate.serialNumber)" *ngIf="certificate.issuedTo.id == this.loggedId || this.role=='ROLE_ADMIN'"></i>
+            </div>
+            <img class="certificate-icon" src="../../assets/certificate.svg" alt="">
+            <div class="certificate-info-container">
+                <p><span class="light-gray">issued to: </span>{{certificate.issuedTo.name + " " + certificate.issuedTo.lastName}} - <span class="light-gray">{{certificate.issuedTo.email}}</span></p>
+                <p><span class="light-gray">issued by:</span> {{certificate.issuer.name + " " + certificate.issuer.lastName}} - <span class="light-gray">{{certificate.issuer.email}}</span></p>
+                <p><span class="light-gray">valid from:</span> {{formatDate(certificate.validFrom)}} <span class="light-gray">to</span> {{formatDate(certificate.validTo)}}</p>
+            </div>
+            <div class="certificate-type" [ngClass]="{ 'back-orange': certificate.type == 'ROOT',
+                                                       'back-yellow-light': certificate.type == 'END',
+                                                       'back-yellow': certificate.type == 'INTERMEDIATE' }">
+                <p>{{certificate.type.toLowerCase()}}</p>
+            </div>
+        </div>
+    </div>
+</div>

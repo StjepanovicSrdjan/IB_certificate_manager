@@ -1,0 +1,37 @@
+<div style="display: flex;
+align-items: center;
+justify-content: center; height: 100%;">
+    <div class="border back-white" id="login-container">
+        <div id="left-container">
+            <img class="login-img" src="../../assets/login.svg" alt="">
+        </div>
+        <div id="form-container">
+            <h1>Welcome back!</h1>
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <mat-form-field>
+                    <mat-label class="modified-label">Email</mat-label>
+                    <input matInput type="email" name="email" formControlName="email" />
+                    <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">entering email is required</mat-error>
+                    <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">invalid email format</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <mat-icon id="eye-icon" matSuffix (click)="isVisible = !isVisible">{{isVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    <input matInput [type]="isVisible? 'text' : 'password'" name="password" formControlName="password" />
+                    <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">entering password is required</mat-error>
+                </mat-form-field>
+                <div class="captcha-div">
+                    <re-captcha id="recaptcha" name="recaptcha" (resolved)="resolved($event)" formControlName="recaptcha"></re-captcha>
+                    <mat-error *ngIf="submited && loginForm.get('recaptcha')?.errors?.['required']">filling recaptcha is required</mat-error>
+                </div>
+                <button type="submit" class="conf-button back-yellow" mat-raised-button>Login</button>
+                <a id="forgotten-password-ref" (click)="redirectToReset()">forgot your password?</a>
+            </form>
+            <div class="social-login-btn" (click)="loginWithGoogle()">
+                <img src="../../assets/google-icon.png" alt="">
+                <p>Continue with Google</p>
+            </div>
+        </div>
+    </div>
+</div>
+

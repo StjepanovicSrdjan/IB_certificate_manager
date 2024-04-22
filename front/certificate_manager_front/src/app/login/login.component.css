@@ -1,0 +1,118 @@
+#login-container{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 550px;
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    /* min-width: 400px; */
+}
+
+p {
+    margin: 0 !important;
+}
+
+h1 {
+    font-weight: 700 !important;
+    margin-bottom: 0px !important;
+}
+
+.modified-label {
+    margin-top: 10px;
+}
+
+#left-container, #form-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px;
+}
+
+.login-img {
+    width: 85%;
+}
+
+#eye-icon {
+    cursor: pointer !important;
+    color: gray;
+}
+
+#form-container{
+    text-align: center;
+}
+
+button {
+    display: block;
+    margin: 30px auto 12px auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 12px;
+    color: white !important;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+#forgotten-password-ref{
+    color: #53666f;
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+
+#forgotten-password-ref:hover{
+    opacity: 0.95;
+}
+
+#recaptcha > div {
+    margin: 0 auto !important;
+}
+
+.captcha-div {
+    text-align: center;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.social-login-btn {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #424242;
+    border-radius: 15px;
+    color: #424242;
+    padding: 8px 18px;
+    margin-top: 15px;
+}
+
+.social-login-btn img {
+    height: 20px;
+    margin-right: 8px;
+}
+
+@media only screen and (max-width: 900px) {
+    #login-container {
+        grid-template-columns: 100%;
+    }
+
+    #left-container {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #login-container {
+        width: 80%;
+    }
+}
+  

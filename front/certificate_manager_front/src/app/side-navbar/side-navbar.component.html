@@ -1,0 +1,73 @@
+<nav class="navbar back-white" id="navbar-smaller">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#" class="orange">Certivus</a>
+            <button class="navbar-toggler" data-toggle="side-navbar-container">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+            </button>
+        </div>  
+    </div>
+</nav>
+<div id="side-navbar-container">
+    <div id="close-btn" (click)="close()">
+        <i class="fa fa-plus"></i>
+    </div>
+    <div id="greeting">
+        <p class="">Welcome back, {{name}}</p> <img id="wave" src="../../assets/waving-hand.png">
+    </div>
+    <div class="section">
+        <p class="section-title">Browse</p>
+        <hr>
+        <div class="section-item" (click)="showCertificates('all')" [ngClass]="url == '/all-certificates'? 'selected-option': ''">
+            <svg height="39" viewBox="0 0 37 39" xmlns="http://www.w3.org/2000/svg">
+                <path [ngClass]="url == '/all-certificates'? 'selected-option': ''" d="M29.4844 37.5984L24.8594 34.3688L20.2344 37.5984V31.6875H2.3125C1.04062 31.6875 0 30.5906 0 29.25V4.875C0 3.53438 1.04062 2.4375 2.3125 2.4375H34.6875C35.9594 2.4375 37 3.53438 37 4.875V29.25C37 30.5906 35.9594 31.6875 34.6875 31.6875H29.4844V37.5984ZM24.8594 31.4438L27.1719 33.0891V28.275C25.7266 28.8234 23.9922 28.8234 22.5469 28.275V33.0891L24.8594 31.4438ZM29.4844 29.25H34.6875V4.875H2.3125V29.25H20.2344V26.7516C18.7891 25.4109 17.9219 23.4609 17.9219 21.3281C17.9219 17.3063 21.0438 14.0156 24.8594 14.0156C28.675 14.0156 31.7969 17.3063 31.7969 21.3281C31.7969 23.4609 30.9297 25.4109 29.4844 26.7516V29.25ZM24.8594 16.4531C22.3156 16.4531 20.2344 18.6469 20.2344 21.3281C20.2344 24.0094 22.3156 26.2031 24.8594 26.2031C27.4031 26.2031 29.4844 24.0094 29.4844 21.3281C29.4844 18.6469 27.4031 16.4531 24.8594 16.4531ZM15.0312 15.2344H5.78125V12.7969H15.0312V15.2344ZM31.2188 10.3594H5.78125V7.92188H31.2188V10.3594Z" fill="#A6A6A6"/>
+                </svg>
+                
+            <p>all certificates</p>
+        </div>
+        <div class="section-item" (click)="showCertificates('my')" [ngClass]="url == '/my-certificates'? 'selected-option': ''">
+            <svg height="39" viewBox="0 0 37 39" xmlns="http://www.w3.org/2000/svg">
+                <path [ngClass]="url == '/my-certificates'? 'selected-option': ''" d="M29.4844 37.5984L24.8594 34.3688L20.2344 37.5984V31.6875H2.3125C1.04062 31.6875 0 30.5906 0 29.25V4.875C0 3.53438 1.04062 2.4375 2.3125 2.4375H34.6875C35.9594 2.4375 37 3.53438 37 4.875V29.25C37 30.5906 35.9594 31.6875 34.6875 31.6875H29.4844V37.5984ZM24.8594 31.4438L27.1719 33.0891V28.275C25.7266 28.8234 23.9922 28.8234 22.5469 28.275V33.0891L24.8594 31.4438ZM29.4844 29.25H34.6875V4.875H2.3125V29.25H20.2344V26.7516C18.7891 25.4109 17.9219 23.4609 17.9219 21.3281C17.9219 17.3063 21.0438 14.0156 24.8594 14.0156C28.675 14.0156 31.7969 17.3063 31.7969 21.3281C31.7969 23.4609 30.9297 25.4109 29.4844 26.7516V29.25ZM24.8594 16.4531C22.3156 16.4531 20.2344 18.6469 20.2344 21.3281C20.2344 24.0094 22.3156 26.2031 24.8594 26.2031C27.4031 26.2031 29.4844 24.0094 29.4844 21.3281C29.4844 18.6469 27.4031 16.4531 24.8594 16.4531ZM15.0312 15.2344H5.78125V12.7969H15.0312V15.2344ZM31.2188 10.3594H5.78125V7.92188H31.2188V10.3594Z" fill="#A6A6A6"/>
+            </svg>                
+            <p>my certificates</p>
+        </div>
+    </div>
+    <div class="section">
+        <p class="section-title">Requests</p>
+        <hr>
+        <div class="section-item" (click)="openRequestReview(true)" *ngIf="role!='ROLE_ADMIN'" [ngClass]="reqByMe == true && url == '/request-review' ? 'selected-option': ''">
+            <i class="fa-solid fa-file-circle-plus"></i>
+            <p>requested by me</p>
+        </div>
+        <div class="section-item" (click)="openRequestReview(false)" *ngIf="role!='ROLE_ADMIN'" [ngClass]="reqFromMe == true && url == '/request-review' ? 'selected-option': ''">
+            <i class="fa-solid fa-file-circle-plus"></i>
+            <p>requested from me</p>
+        </div>
+        <div class="section-item" (click)="openRequestReview(false)" *ngIf="role=='ROLE_ADMIN'" [ngClass]="url == '/request-review' ? 'selected-option': ''">
+            <i class="fa-solid fa-file-circle-plus"></i>
+            <p>all requests</p>
+        </div>
+    </div>
+    <div class="section" (click)="showValidate()" [ngClass]="url == '/validate'? 'selected-option': ''">
+        <p class="section-title">Validation</p>
+        <hr>
+        <div class="section-item" >
+            <i class="fa-solid fa-circle-check"></i>
+            <p>validate certificate</p>
+        </div>
+        
+    </div>
+    <div class="section" *ngIf="role == 'ROLE_ADMIN'">
+        <p class="section-title">Root certificate</p>
+        <hr>
+        <div class="section-item" (click)="createRootCertificate()">
+            <i class="fa-solid fa-file-circle-plus certificate-option-request" style="cursor: pointer"></i>
+            <p>create root certificate</p>
+        </div>
+    </div>
+    <div id="logout-container">
+        <button id="logout-btn" class="outline-btn" (click)="logout()">Logout</button>
+    </div>
+</div>

@@ -1,5 +1,7 @@
 package com.certificate_manager.certificate_manager.entities;
 
+import java.time.LocalDateTime;
+
 import com.certificate_manager.certificate_manager.dtos.UserDTO;
 import com.certificate_manager.certificate_manager.enums.UserRole;
 
@@ -33,17 +35,21 @@ public class User {
 	@Email
 	private String email;
 
-	@NotEmpty
+//	@NotEmpty
 	@Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*")
 	private String phoneNumber;
 
-	@NotEmpty
+//	@NotEmpty
 	private String password;
 
 	private Boolean verified;
+	
+	private String socialId;
 
 	@NotNull
 	private UserRole role;
+	
+	private LocalDateTime timeOfLastSetPassword;
 
 	public User() {
 
@@ -60,6 +66,21 @@ public class User {
 		this.password = password;
 		this.verified = verified;
 		this.role = UserRole.USER;
+		this.timeOfLastSetPassword = LocalDateTime.now();
+		this.socialId = null;
+	}
+	
+	public User(String name, String lastname, String email,
+			Boolean verified, String socialId, String password) {
+		super();
+		this.name = name;
+		this.lastname = lastname;
+		this.email = email;
+		this.phoneNumber = null;
+		this.password = password;
+		this.verified = verified;
+		this.role = UserRole.USER;
+		this.socialId = socialId;
 	}
 
 	public User(int id, String name, String lastname, String email, String phoneNumber, String password,
@@ -73,6 +94,8 @@ public class User {
 		this.password = password;
 		this.verified = verified;
 		this.role = role;
+		this.timeOfLastSetPassword = LocalDateTime.now();
+		this.socialId = null;
 	}
 	
 	public User(UserDTO userDTO) {
@@ -81,6 +104,8 @@ public class User {
 		this.lastname = userDTO.getLastname();
 		this.email = userDTO.getEmail();
 		this.phoneNumber = userDTO.getPhoneNumber();
+		this.verified = false;
+		this.socialId = null;
 	}
 
 	public int getId() {
@@ -147,4 +172,20 @@ public class User {
 		this.role = role;
 	}
 
+	public LocalDateTime getTimeOfLastSetPassword() {
+		return timeOfLastSetPassword;
+	}
+
+	public void setTimeOfLastSetPassword(LocalDateTime timeOfLastSetPassword) {
+		this.timeOfLastSetPassword = timeOfLastSetPassword;
+	}
+	
+	
+	public String getSocialId() {
+		return socialId;
+	}
+
+	public void setSocialId(String socialId) {
+		this.socialId = socialId;
+	}
 }

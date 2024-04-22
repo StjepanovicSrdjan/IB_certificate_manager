@@ -1,0 +1,135 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+// The warn palette is optional (defaults to red).
+
+$orange: (
+    50: #ffd8ad,
+    100: #ffc685,
+    200: #ffb35e,
+    300: #ffaa4a,
+    400: #ff9823,
+    500: #fb8500,
+    600: #e77b00,
+    700: #d47000,
+    800: #c06600,
+    900: #ad5b00,
+    A100: #ffc685,
+    A200: #ffb35e,
+    A400: #ff9823,
+    A700: #d47000,
+    contrast: (
+        50: #8ecae6,
+        100: #8ecae6,
+        200: #8ecae6,
+        300: #8ecae6,
+        400: #8ecae6,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: #8ecae6,
+        A200: #8ecae6,
+        A400: #8ecae6,
+        A700: white,
+    )
+);
+
+$blue: (
+    50: #def0f8,
+    100: #cee8f4,
+    200: #bee1f1,
+    300: #aed9ed,
+    400: #9ed2ea,
+    500: #8ecae6,
+    600: #7ec2e2,
+    700: #6ebbdf,
+    800: #5eb3db,
+    900: #4eacd8,
+    A100: #cee8f4,
+    A200: #bee1f1,
+    A400: #9ed2ea,
+    A700: #6ebbdf,
+    contrast: (
+        50: #023047,
+        100: #023047,
+        200: #023047,
+        300: #023047,
+        400: #023047,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: #023047,
+        A200: #023047,
+        A400: #023047,
+        A700: white,
+    )
+);
+
+
+$red: (
+    50: #f3d4c9,
+    100: #f0c8b9,
+    200: #ecbba8,
+    300: #e9ae98,
+    400: #e5a288,
+    500: #e29578,
+    600: #db7c58,
+    700: #d46237,
+    800: #cc582c,
+    900: #ac4a25,
+    A100: #f0c8b9,
+    A200: #ecbba8,
+    A400: #e5a288,
+    A700: #d46237,
+    contrast: (
+        50: black,
+        100: black,
+        200: black,
+        300: black,
+        400: black,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: black,
+        A200: black,
+        A400: black,
+        A700: white,
+    )
+);
+
+
+$HCI_mini_project-primary: mat.define-palette($orange);
+$HCI_mini_project-accent: mat.define-palette($blue);
+
+$HCI_mini_project-warn: mat.define-palette($red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$HCI_mini_project-theme: mat.define-light-theme((
+  color: (
+    primary: $HCI_mini_project-primary,
+    accent: $HCI_mini_project-accent,
+    warn: $HCI_mini_project-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($HCI_mini_project-theme);

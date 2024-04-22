@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 
+import org.springframework.core.io.Resource;
+
+import com.certificate_manager.certificate_manager.dtos.DownloadCertDTO;
+
 public interface ICertificateFileRepository {
 
 	public void saveCertificateAsPEMFile(Object x509Certificate) throws IOException;
@@ -14,4 +18,7 @@ public interface ICertificateFileRepository {
 
 	public X509Certificate readX509Certificate(String serialNumber) throws Exception;
 
+	public DownloadCertDTO readCertificateAsResource(String serialNumber);
+	
+	public DownloadCertDTO readKeyAsResource(String serialNumber);
 }

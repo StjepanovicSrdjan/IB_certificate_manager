@@ -1,0 +1,21 @@
+ <!-- <app-navbar #child></app-navbar> -->
+ 
+ <div class="default-container border">
+    <h1 class="title dark-blue">Activate account</h1>
+    <p style="color: #A6A6A6; font-weight: 550; margin-top: 10px;">One step left! Type in the code you recieved from SMS that has been sent to you!</p>
+    <!-- <img src="../../assets/login.svg" alt="" height="300px"> -->
+    <form>
+      <div class="form-group">
+        <!-- <label for="otp-input">Enter OTP</label> -->
+        <ngx-otp-input
+          id="otp-input"
+          [config]="otpConfig"
+          (fill)="onOtpComplete($event)"
+        
+        ></ngx-otp-input>
+      </div>
+      <button type="submit" class="conf-button back-yellow" (click)="verifyRegistration()" mat-raised-button>Submit</button>
+      <!-- <a id="new-code-ref" (click)="sendNewSMS()">Haven't recieved any code? <span class="yellow">Send again</span></a> -->
+    </form>  
+</div>
+  

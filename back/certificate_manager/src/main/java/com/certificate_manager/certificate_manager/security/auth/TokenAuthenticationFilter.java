@@ -4,11 +4,13 @@ import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.certificate_manager.certificate_manager.security.jwt.IJWTTokenService;
 import com.certificate_manager.certificate_manager.security.jwt.TokenUtils;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -23,11 +25,14 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
 	private UserDetailsService userDetailsService;
 	
+	private IJWTTokenService tokenService;
+	
 	protected final Log LOGGER = LogFactory.getLog(getClass());
 
-	public TokenAuthenticationFilter(TokenUtils tokenHelper, UserDetailsService userDetailsService) {
+	public TokenAuthenticationFilter(TokenUtils tokenHelper, UserDetailsService userDetailsService, IJWTTokenService tokenService) {
 		this.tokenUtils = tokenHelper;
 		this.userDetailsService = userDetailsService;
+		this.tokenService = tokenService;
 	}
 
 	@Override
@@ -36,17 +41,18 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
 
 		String email;
-		
+		System.out.println(request.getRequestURI());
 		String authToken = tokenUtils.getToken(request);
 		
 		try {
 	
 			if (authToken != null) {
-
-				if (authToken.charAt(0) == '\"')
-					authToken = authToken.substring(1, authToken.length() - 1);
-
-
+				
+				
+				if (!request.getRequestURI().contains("twofactor")) {
+					if (!tokenService.isValid(authToken))
+						throw new ExpiredJwtException(null, null, "Invalid token!");
+				}
 				email = tokenUtils.getUsernameFromToken(authToken);
 				if (email != null) {
 					UserDetails userDetails = userDetailsService.loadUserByUsername(email);

@@ -1,0 +1,7 @@
+<div id="container" [ngClass]="loggedIn ? 'logged' : 'not-logged'">
+    <app-navbar *ngIf="!loggedIn"></app-navbar>
+    <app-side-navbar *ngIf="loggedIn"></app-side-navbar>
+    <div id="main-content">
+        <router-outlet></router-outlet>
+    </div> 
+</div>

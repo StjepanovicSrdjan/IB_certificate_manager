@@ -1,0 +1,43 @@
+<div>
+    <h1 class="orange">Validate certificate</h1>
+
+    <div class="certificate-card" id="cert-validity-container">
+        <div id="two-options-container">
+            <button (click)="clickedFirst()" mat-button [ngClass]="firstOption == true ? 'orange option-container weight-700' : 'gray option-container'">Type in serial number</button>
+            <button (click)="clickedSecond()" mat-button [ngClass]="firstOption == false ? 'orange option-container weight-700' : 'gray option-container'">Upload certificate copy</button>
+        </div>
+        <div *ngIf="this.firstOption" style="display: flex;" class="resp-flex">
+            <form [formGroup]="serialNumberForm">
+                <mat-form-field >
+                    <mat-label>serial number</mat-label>
+                    <input matInput type="text" name="serialNumber" formControlName="serialNumber" />
+                    <mat-error *ngIf="serialNumberForm.get('serialNumber')?.errors?.['required']">entering ser. num. is required</mat-error>
+                </mat-form-field>
+            </form>
+            <button mat-button class="back-yellow conf-button" (click)="validateBySerialNumber()">validate</button>
+        </div>
+        <div *ngIf="!this.firstOption" style="display: flex;" class="resp-flex">
+            <button mat-button class="back-orange conf-button" (click)="imageInput.click()">
+                upload
+                <input #imageInput type="file" (change)="onFileSelect($event)" style="display: none">
+            </button>
+            <form [formGroup]="certNameForm">
+                <mat-form-field>
+                    <mat-label>certificate name</mat-label>
+                    <input matInput type="text" name="certName" formControlName="certName"/>
+                </mat-form-field>
+            </form>
+            <button mat-button class="back-yellow conf-button" (click)="validateByUpload()">validate</button>
+        </div>
+    </div>
+    <!-- *ngIf="this.validity == 'valid'" -->
+    <div id="validity-container" class="certificate-card" *ngIf="this.validity != ''">
+        <!-- <i class="fa-solid fa-xmark" style="width: 30px; color: #A8201A;"></i> -->
+        <!-- <span id="boot-icon" class="bi bi-x" style="font-size: 10rem; -webkit-text-stroke-width: 2px;"></span> -->
+        <img src="../../assets/green-check.png" style="width: 25px;" *ngIf="this.validity == 'valid'"/>
+        <p style="color: #B9B9B9;" *ngIf="this.validity == 'valid'">Hoooray! Certificate is valid!</p>
+
+        <img src="../../assets/remove.png" style="width: 25px;" *ngIf="this.validity == 'not'"/>
+        <p style="color: #B9B9B9;" *ngIf="this.validity == 'not'">Wooops! Certificate is not valid!</p>
+    </div>
+</div>

@@ -14,13 +14,22 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.certificate_manager.certificate_manager.exceptions.BadCaptchaException;
 import com.certificate_manager.certificate_manager.exceptions.CertificateNotFoundException;
 import com.certificate_manager.certificate_manager.exceptions.CertificateNotValidException;
+import com.certificate_manager.certificate_manager.exceptions.GoogleIdTokenException;
+import com.certificate_manager.certificate_manager.exceptions.InvalidFileExtensionException;
+import com.certificate_manager.certificate_manager.exceptions.NoAuthorizationForKeyException;
+import com.certificate_manager.certificate_manager.exceptions.NoCaptchaException;
 import com.certificate_manager.certificate_manager.exceptions.NotPendingRequestException;
 import com.certificate_manager.certificate_manager.exceptions.NotTheIssuerException;
+import com.certificate_manager.certificate_manager.exceptions.PasswordAlreadyUsedException;
+import com.certificate_manager.certificate_manager.exceptions.PasswordsNotMatchingException;
+import com.certificate_manager.certificate_manager.exceptions.RootCertificateNotForWithdrawalException;
 import com.certificate_manager.certificate_manager.exceptions.UserAlreadyExistsException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,6 +59,22 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
         setResponseError(response, HttpServletResponse.SC_NOT_FOUND, String.format("Not found: %s", notFoundException.getMessage()));
     }
     
+    @ExceptionHandler(NoCaptchaException.class)
+    protected ResponseEntity<Object> handleNoCaptchaException(NoCaptchaException e){
+    	return new ResponseEntity<>("No captcha was passed!", HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(GoogleIdTokenException.class)
+    protected ResponseEntity<Object> handleFetchingAccessTokenException(GoogleIdTokenException e){
+    	return new ResponseEntity<>("Error occured while trying to proccess your Google sign in. Try again.", HttpStatus.BAD_REQUEST);
+    }
+    
+      
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    protected ResponseEntity<Object> handleMissingRequestHeaderException(MissingRequestHeaderException e){
+    	return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+    
     @ExceptionHandler (value = {HttpMessageNotReadableException.class})
 	protected ResponseEntity<String> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
 		return new ResponseEntity<String>("Request body is required.", HttpStatus.BAD_REQUEST);
@@ -63,6 +88,11 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @ExceptionHandler(CertificateNotFoundException.class)
   	protected ResponseEntity<String> handleCertificateNotFoundException(CertificateNotFoundException e) {
   		return new ResponseEntity<String>("Certificate not found!", HttpStatus.BAD_REQUEST);
+  	}
+    
+    @ExceptionHandler(NoAuthorizationForKeyException.class)
+  	protected ResponseEntity<String> handleNoAuthorizationForKeyException(NoAuthorizationForKeyException e) {
+  		return new ResponseEntity<String>("You have no authorization to acces the key for the certificate.", HttpStatus.BAD_REQUEST);
   	}
     
     @ExceptionHandler(BadCredentialsException.class)
@@ -89,6 +119,32 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     protected ResponseEntity<Object> handleCertificateNotValidException(CertificateNotValidException e){
     	return new ResponseEntity<>("Certificate is not valid!", HttpStatus.EXPECTATION_FAILED);
     }
+    
+    @ExceptionHandler(RootCertificateNotForWithdrawalException.class)
+    protected ResponseEntity<Object> handleRootCertificateNotForWithdrawalException(RootCertificateNotForWithdrawalException e){
+    	return new ResponseEntity<>("Root certificate is not for withdrawal!", HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(PasswordAlreadyUsedException.class)
+    protected ResponseEntity<Object> handlePasswordAlreadyUsedException(PasswordAlreadyUsedException e){
+    	return new ResponseEntity<>("Password has already been used!", HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(PasswordsNotMatchingException.class)
+    protected ResponseEntity<Object> handlePasswordsNotMatchingException(PasswordsNotMatchingException e){
+    	return new ResponseEntity<>("Current password is not correct!", HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(BadCaptchaException.class)
+    protected ResponseEntity<Object> handleBadCaptchaException(BadCaptchaException e){
+    	return new ResponseEntity<>("Captcha invalid! Are you a robot?", HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(InvalidFileExtensionException.class)
+    protected ResponseEntity<Object> handleInvalidFileExtensionException(InvalidFileExtensionException e){
+    	return new ResponseEntity<>("Invalid file extension!", HttpStatus.BAD_REQUEST);
+    }
+    
+
 	
 	@ExceptionHandler (value = {MethodArgumentNotValidException.class})
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {

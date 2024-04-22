@@ -1,0 +1,70 @@
+::ng-deep .ngx-otp-input{
+    border: 1.5px solid #fb8500 !important;
+    color: #000000;
+    font-weight: 600;
+    margin: 10px auto;
+}
+
+.default-container {
+    display: flex;
+    height: fit-content;
+    width: 400px;
+    margin: 100px auto 20px auto;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    /* border-top: 20px solid #337D98 !important; */
+    text-align: center;
+    flex-direction: column;
+    padding: 15px;
+    padding-top: 25px;
+    position: relative;
+    font-size: 1em;
+    border-radius: 10px;
+}
+
+button {
+    margin: 16px auto 6px auto;
+}
+
+.title {
+    margin-top: 0px;
+    color: #000000;
+    font-weight: 500;
+    font-size: 1.7em;
+    margin-bottom: 0px;
+}
+
+
+img {
+    margin-top: 15px;
+}
+
+
+::ng-deep .mat-icon {
+    color: #ffb703;
+}
+
+#new-code-ref{
+    color: #A6A6A6;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.8em;
+}
+
+#new-code-ref:hover{
+    opacity: 0.95;
+}
+
+
+@media screen and (max-width: 450px)  {
+    .default-container {
+        width: 305px;
+        margin-top: 45px;
+    }
+
+    form {
+        width: 100%;
+    }
+}

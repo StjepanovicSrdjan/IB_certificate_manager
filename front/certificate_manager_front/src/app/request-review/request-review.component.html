@@ -1,0 +1,38 @@
+<div id="requests-container" class="border">
+    <div id="requests-header">
+        <h3 class="title orange">Certificate requests</h3>
+        <div id="header-buttons">
+            <div class="header-button" [ngClass]="currentOption == 'pending'? 'selected-header-button': ''" (click)="changeTab('pending')">
+                pending
+            </div>
+            <div class="header-button" [ngClass]="currentOption == 'processed'? 'selected-header-button': ''" (click)="changeTab('processed')">
+                processed
+            </div>
+        </div>
+    </div>
+    <div id="request-cards">
+        <div class="request-card" *ngFor="let request of requests" [ngClass]="{'selected-request-card': selectedRequestId == request.id, 'accepted-request': request.status == 'ACCEPTED', 'denied-request': request.status == 'DENIED'}" (click)="selectRequest(request)">
+            <div class="driver-data">
+                <!--[src]= "request.driver.profilePicture" -->
+                <img src="../../assets/certificate.svg" class="driver-photo">
+                <div class="driver-info">
+                    <!-- <p class="driver-name dark-blue"></p> -->
+                    <div class="driver-contact-info">
+                    <p class="driver-email dark-gray"><span class="orange">Issuer email: </span>{{request.issuer.issuedTo.email}}</p>
+                    <p class="driver-phone dark-gray"><span class="orange">Type: </span>{{request.type}}</p>
+                    <p class="driver-email dark-gray"><span class="orange">Valid to: </span>{{formatDate(request.validTo)}}</p>
+                </div>    
+            </div> 
+            </div>
+            <p class="driver-name dark-blue request-p" *ngIf="_role.toLowerCase() == 'role_driver'">Request</p>
+            <p class="request-time dark-gray">
+                {{formatDate(request.date)}}
+            </p>           
+        </div>
+    </div>
+    <div id="buttons" *ngIf="(!this.areByMe && this.currentOption == 'pending') || (this._role == 'ROLE_ADMIN' && this.currentOption == 'pending')">
+        <button id="acceptBtn" (click)="acceptRequest()" [ngClass]="selectedRequestId == -1? 'not-clickable': ''">Accept</button>
+        <button id="declineBtn" (click)="declineRequest()" [ngClass]="selectedRequestId == -1? 'not-clickable': ''">Decline</button>
+    </div>
+
+</div>

@@ -1,0 +1,27 @@
+h1 {
+    margin-bottom: 0 !important;
+}
+
+#decline-request-container{
+    width: 400px;
+    text-align: center;
+}
+
+.mat-mdc-form-field{
+    height: 200px !important;
+    padding-top: 10px;
+}
+
+#text-area-container {
+    height: 100%;
+    margin-top: 10px;
+    margin-bottom: -20px;
+    
+    padding: 0;
+}
+
+@media screen and (max-width: 450px){
+    #decline-request-container{
+        width: 240px;
+    }
+}

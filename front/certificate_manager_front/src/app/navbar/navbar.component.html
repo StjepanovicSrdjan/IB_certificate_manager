@@ -1,0 +1,20 @@
+<nav #nav class="navbar back-white">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#" class="orange">Certivus</a>
+            <button class="navbar-toggler" data-toggle="open-navbar1">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+            </button>
+        </div>  
+      <div class="navbar-menu" id="open-navbar1">
+        <div class="navbar-nav">
+            <!-- <a *ngIf="role != 'ROLE_ADMIN' && role != null" (click)="openHome(role)">Home</a> -->
+            <!-- <a *ngIf="role != null" [routerLink]="['/ride-history']">History</a> -->
+            <a id="login-option" class="yellow" *ngIf="role === ''" [routerLink]="['login']">Log in</a>
+            <a id="sign-up-option" class="back-yellow" *ngIf="role === ''" [routerLink]="['register']">Register</a>  
+        </div>
+      </div>
+    </div>
+  </nav>

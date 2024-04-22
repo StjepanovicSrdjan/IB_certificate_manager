@@ -1,0 +1,77 @@
+2023-06-15 23:26:11,113 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.0.Final
+2023-06-15 23:26:11,190 INFO o.s.b.StartupInfoLogger [restartedMain] Starting CertificateManagerApplication using Java 17.0.5 with PID 34572 (C:\6. semestar\Bezbednost\IB_certificate_manager\back\certificate_manager\target\classes started by Nemanja in C:\6. semestar\Bezbednost\IB_certificate_manager\back\certificate_manager)
+2023-06-15 23:26:11,200 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-06-15 23:26:11,342 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-06-15 23:26:11,343 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-06-15 23:26:13,123 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-15 23:26:13,314 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 180 ms. Found 5 JPA repository interfaces.
+2023-06-15 23:26:15,839 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 4388 (http)
+2023-06-15 23:26:15,864 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-4388"]
+2023-06-15 23:26:15,866 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-06-15 23:26:15,868 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.7]
+2023-06-15 23:26:16,035 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-06-15 23:26:16,038 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 4693 ms
+2023-06-15 23:26:16,524 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-15 23:26:16,625 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-06-15 23:26:17,609 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-06-15 23:26:18,000 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@72e125e9
+2023-06-15 23:26:18,007 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-06-15 23:26:18,182 INFO o.h.e.j.d.i.DialectFactoryImpl [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-06-15 23:26:21,290 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-15 23:26:21,309 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-15 23:26:24,849 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-15 23:26:25,506 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1f38cbdd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3a76b140, org.springframework.security.web.context.SecurityContextHolderFilter@4de8eb79, org.springframework.security.web.header.HeaderWriterFilter@c27eec9, org.springframework.web.filter.CorsFilter@3d732d3b, org.springframework.security.web.authentication.logout.LogoutFilter@16438bbb, com.certificate_manager.certificate_manager.security.auth.TokenAuthenticationFilter@70ed7417, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7da05190, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@72f4016f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@29522ff4, org.springframework.security.web.session.SessionManagementFilter@5b537f5c, org.springframework.security.web.access.ExceptionTranslationFilter@4137e745, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2250f7a9]
+2023-06-15 23:26:25,548 WARN o.s.s.c.a.w.b.WebSecurity [restartedMain] You are asking Spring Security to ignore Mvc [pattern='/api/user/login', POST]. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-06-15 23:26:25,549 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will not secure Mvc [pattern='/api/user/login', POST]
+2023-06-15 23:26:25,551 WARN o.s.s.c.a.w.b.WebSecurity [restartedMain] You are asking Spring Security to ignore Mvc [pattern='/api/user', POST]. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-06-15 23:26:25,552 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will not secure Mvc [pattern='/api/user', POST]
+2023-06-15 23:26:26,487 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-06-15 23:26:26,521 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-4388"]
+2023-06-15 23:26:26,565 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 4388 (http) with context path ''
+2023-06-15 23:26:26,594 INFO o.s.b.StartupInfoLogger [restartedMain] Started CertificateManagerApplication in 16.799 seconds (process running for 18.921)
+2023-06-15 23:26:31,635 INFO c.c.c.c.ScheduledController [scheduling-1] aaa
+2023-06-15 23:31:48,487 INFO o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener [File Watcher] Restarting due to 74 class path changes (0 additions, 0 deletions, 74 modifications)
+2023-06-15 23:31:48,529 INFO o.a.j.l.DirectJDKLog [Thread-5] Pausing ProtocolHandler ["http-nio-4388"]
+2023-06-15 23:31:48,530 INFO o.a.j.l.DirectJDKLog [Thread-5] Stopping service [Tomcat]
+2023-06-15 23:31:48,541 INFO o.a.j.l.DirectJDKLog [Thread-5] Stopping ProtocolHandler ["http-nio-4388"]
+2023-06-15 23:31:48,548 INFO o.a.j.l.DirectJDKLog [Thread-5] Destroying ProtocolHandler ["http-nio-4388"]
+2023-06-15 23:31:48,561 INFO o.s.o.j.AbstractEntityManagerFactoryBean [Thread-5] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-15 23:31:48,571 INFO c.z.h.HikariDataSource [Thread-5] HikariPool-1 - Shutdown initiated...
+2023-06-15 23:31:48,589 INFO c.z.h.HikariDataSource [Thread-5] HikariPool-1 - Shutdown completed.
+2023-06-15 23:31:48,818 INFO o.s.b.StartupInfoLogger [restartedMain] Starting CertificateManagerApplication using Java 17.0.5 with PID 34572 (C:\6. semestar\Bezbednost\IB_certificate_manager\back\certificate_manager\target\classes started by Nemanja in C:\6. semestar\Bezbednost\IB_certificate_manager\back\certificate_manager)
+2023-06-15 23:31:48,820 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-06-15 23:31:49,324 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-15 23:31:49,396 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 71 ms. Found 5 JPA repository interfaces.
+2023-06-15 23:31:49,793 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 4388 (http)
+2023-06-15 23:31:49,795 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-4388"]
+2023-06-15 23:31:49,796 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-06-15 23:31:49,797 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.7]
+2023-06-15 23:31:49,859 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-06-15 23:31:49,859 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1034 ms
+2023-06-15 23:31:50,040 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-15 23:31:50,063 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-2 - Starting...
+2023-06-15 23:31:50,141 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@daea19d
+2023-06-15 23:31:50,141 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-2 - Start completed.
+2023-06-15 23:31:50,153 INFO o.h.e.j.d.i.DialectFactoryImpl [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-06-15 23:31:50,531 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-15 23:31:50,533 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-15 23:31:51,379 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-15 23:31:51,597 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6009ca46, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3ca7b88, org.springframework.security.web.context.SecurityContextHolderFilter@5447ed42, org.springframework.security.web.header.HeaderWriterFilter@6a76a218, org.springframework.web.filter.CorsFilter@769a681, org.springframework.security.web.authentication.logout.LogoutFilter@6d5ff77a, com.certificate_manager.certificate_manager.security.auth.TokenAuthenticationFilter@15f11d42, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@17e5a872, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@48dcbef4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3b84ae40, org.springframework.security.web.session.SessionManagementFilter@6a549bf2, org.springframework.security.web.access.ExceptionTranslationFilter@4f918e06, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@42590f]
+2023-06-15 23:31:51,609 WARN o.s.s.c.a.w.b.WebSecurity [restartedMain] You are asking Spring Security to ignore Mvc [pattern='/api/user/login', POST]. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-06-15 23:31:51,610 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will not secure Mvc [pattern='/api/user/login', POST]
+2023-06-15 23:31:51,611 WARN o.s.s.c.a.w.b.WebSecurity [restartedMain] You are asking Spring Security to ignore Mvc [pattern='/api/user', POST]. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-06-15 23:31:51,611 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will not secure Mvc [pattern='/api/user', POST]
+2023-06-15 23:31:51,896 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-06-15 23:31:51,923 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-4388"]
+2023-06-15 23:31:51,930 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 4388 (http) with context path ''
+2023-06-15 23:31:51,942 INFO o.s.b.StartupInfoLogger [restartedMain] Started CertificateManagerApplication in 3.221 seconds (process running for 344.269)
+2023-06-15 23:31:51,948 INFO o.s.b.d.a.ConditionEvaluationDeltaLoggingListener [restartedMain] Condition evaluation unchanged
+2023-06-15 23:31:56,959 INFO c.c.c.c.ScheduledController [scheduling-1] aaa
+2023-06-15 23:32:15,532 INFO o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener [File Watcher] Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-06-15 23:32:15,549 INFO o.a.j.l.DirectJDKLog [Thread-7] Pausing ProtocolHandler ["http-nio-4388"]
+2023-06-15 23:32:15,550 INFO o.a.j.l.DirectJDKLog [Thread-7] Stopping service [Tomcat]
+2023-06-15 23:32:15,553 INFO o.a.j.l.DirectJDKLog [Thread-7] Stopping ProtocolHandler ["http-nio-4388"]
+2023-06-15 23:32:15,555 INFO o.a.j.l.DirectJDKLog [Thread-7] Destroying ProtocolHandler ["http-nio-4388"]
+2023-06-15 23:32:15,559 INFO o.s.o.j.AbstractEntityManagerFactoryBean [Thread-7] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-15 23:32:15,559 INFO c.z.h.HikariDataSource [Thread-7] HikariPool-2 - Shutdown initiated...
+2023-06-15 23:32:15,565 INFO c.z.h.HikariDataSource [Thread-7] HikariPool-2 - Shutdown completed.

@@ -33,4 +33,11 @@ public class CredentialsDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "[email=" + email + ", password=" + password + "]";
+	}
+	
+	
 }

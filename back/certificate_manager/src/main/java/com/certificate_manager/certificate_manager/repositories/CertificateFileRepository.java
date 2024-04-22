@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Paths;
 import java.security.PrivateKey;
 import java.security.Security;
 import java.security.cert.X509Certificate;
@@ -16,8 +18,14 @@ import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 import org.bouncycastle.openssl.jcajce.JcaPEMWriter;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import java.nio.file.Path;
 import org.springframework.stereotype.Repository;
 
+import com.certificate_manager.certificate_manager.dtos.DownloadCertDTO;
+import com.certificate_manager.certificate_manager.exceptions.CertificateNotFoundException;
 import com.certificate_manager.certificate_manager.repositories.interfaces.ICertificateFileRepository;
 
 @Repository
@@ -77,6 +85,36 @@ public class CertificateFileRepository implements ICertificateFileRepository {
 		    
 		    return certificate;
 	    }
+	}
+
+	@Override
+	public DownloadCertDTO readCertificateAsResource(String serialNumber) {
+		Resource resource;
+		
+		resource = new FileSystemResource(CERTS_DIR + serialNumber + ".crt");
+		Path file = Paths.get(CERTS_DIR).resolve(serialNumber + ".crt");
+		file.normalize();
+
+        if (resource.exists() || resource.isReadable()) {
+            return new DownloadCertDTO(resource, file);
+        } else {
+        	throw new CertificateNotFoundException();
+        }
+        
+        
+	}
+
+	@Override
+	public DownloadCertDTO readKeyAsResource(String serialNumber) {
+		Resource resource;
+		resource = new FileSystemResource(KEY_DIR + serialNumber + ".key");
+		Path file = Paths.get(KEY_DIR).resolve(serialNumber + ".key");
+
+        if (resource.exists() || resource.isReadable()) {
+            return new DownloadCertDTO(resource, file);
+        } else {
+        	throw new CertificateNotFoundException();
+        }
 	}
 
 	
